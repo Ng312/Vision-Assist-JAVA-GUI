@@ -2,11 +2,13 @@ package application;
 
 import java.sql.*;
 
+
 import org.apache.derby.iapi.sql.Statement;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,9 +28,10 @@ public class Main extends Application {
   int width = 350;
   int height = 210;
   private Statement stmt;
+
   // Declare an array of Strings for flag titles
-  private String[] productTitles = {"SmartScript Spectacle", "CaptureLens Spectacle","LinguaAudio Translens",
-		  "AndroidGaze SmartFrames","ChromaCorrect Glasses"};
+  private String[] productTitles = {"NightVision Optics", "ClearSight Optics","FarSight Precision Optics ",
+		  "ChromaCorrect Opticss","PresbySculpt Optics"};
 
   // Declare an ImageView array for the glasses
   private ImageView[] glassesImage = {new ImageView("glasses1.jpg"),
@@ -45,6 +49,7 @@ public class Main extends Application {
   private ComboBox<String> cbo = new ComboBox<>(); // 
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
+	  
     //Set size for each image 
     for (ImageView imageView : glassesImage) {
           imageView.setFitWidth(width);  // Set your preferred width
@@ -52,32 +57,21 @@ public class Main extends Application {
     }
 	  
 	// Set text description
-    glassesDescription[0] = "Introducing the SmartScript Spectacle – Your Gateway to Multilingual Excellence! "
-    		+ "\n\n" + "Unlock the power of seamless communication with the revolutionary SmartScript "
-    		+ "\n" + "Spectacle,a cutting-edge device that transcends language barriers effortlessly. "
-    		+ "\n" + "This sleek and compact device is your personal translator, designed to "
-    		+ "\n" + "make communication a breeze no matter where you are in the world.";
-    glassesDescription[1] = "Introducing CaptureLens Spectacles – Your Vision, Your Memories, Captured! "
-    		+ "\n\n" + "Elevate your visual storytelling with the groundbreaking CaptureLens Spectacles"
-    		+ "\n" + "a cutting-edge wearable that seamlessly integrates photography and videography"
-    		+ "\n" + "into your everyday experiences. With a sleek and stylish design, these spectacles"
-    		+ "\n" + "go beyond mere eyewear – they are your personal lens to a world of limitless creativity.";
-    glassesDescription[2] = "Introducing LinguaAudio Translens – Where Languages Unite in Harmony!"
-    		+ "\n\n" + "Step into a world of seamless communication with the LinguaAudio Translens,"
-    		+ "\n" + "a groundbreaking pair of smart spectacles designed to transcend linguistic"
-    		+ "\n" + "boundaries. Immerse yourself in the art of conversation without missing a beat – "
-    		+ "\n" + "these intelligent spectacles not only enhance your vision but" 
-    		+ "\n" +"also serve as your personal audio translator.";
-    glassesDescription[3] = "Introducing AndroidGaze SmartFrames – Your Portal to the Digital Universe, "
-    		+ "\n" + "Right on Your Nose!" + "\n\n" + "Unleash the power of technology with the AndroidGaze SmartFrames, a revolutionary"
-    		+ "\n"+ "pair of smart spectacles that redefine what eyewear can be. Featuring a built-in" 
-    		+ "\n" + "Android system, these frames seamlessly transform into a compact yet powerful " 
-    		+ "\n" + "martphone, bringing the world of apps, connectivity, and innovation right to your gaze.";
-    glassesDescription[4] = "Introducing ChromaCorrect Glasses – See the World in True Color, Naturally!"
-    		+ "\n\n" + "Experience the world through a lens of vibrant clarity with ChromaCorrect Glasses"
-    		+ "\n" + "a revolutionary eyewear innovation designed to enhance and color-correct your vision."
-    		+ "\n" + "These spectacles go beyond ordinary eyewear, providing a unique and" 
-    		+ "\n" + "natural way to see the world in its true, vivid colors.";
+    glassesDescription[0] = "Introducing our revolutionary eyewear solution, NightVision Optics, specially designed to provide enhanced "
+    		+ "visibility and combat night blindness. Engineered with cutting-edge technology,"
+    		+ " these glasses are crafted for those seeking improved vision in low-light conditions.";
+    glassesDescription[1] = "Discover a new realm of visual clarity with our ClearSight Optics, meticulously designed to address "
+    		+ "short-sightedness and provide unparalleled visual correction. Engineered with precision and comfort in mind, "
+    		+ "these glasses offer a holistic approach to managing myopia.";
+    glassesDescription[2] = "Experience the world with unparalleled clarity and precision using our FarSight Precision Optics ,"
+    		+ " expertly crafted to address long-sightedness and provide a crystal-clear view of both near and distant objects. "
+    		+ "Designed for comfort and style, these glasses redefine the way you perceive the world.";
+    glassesDescription[3] = "Introducing ChromaCorrect Optic, a groundbreaking solution designed to transform the way individuals "
+    		+ "with color blindness experience the world. These cutting-edge glasses are engineered to enhance color perception,"
+    		+ " providing a vivid and vibrant visual experience like never before.";
+    glassesDescription[4] = "Empower your vision and rediscover the joy of reading with PresbySculpt Optics. "
+    		+ "Crafted specifically for individuals experiencing presbyopia, these innovative glasses seamlessly"
+    		+ "blend advanced optics with elegant design, offering a sophisticated solution for near-vision clarity.";
     		
     
     // Set the first product for display
@@ -88,10 +82,6 @@ public class Main extends Application {
     //pane.setStyle("-fx-background : #FFE194;");
     BorderPane paneForComboBox = new BorderPane();
 
-    //User type email
-    //initializeDB();
-
-    
     VBox vBox = new VBox(10);
  
     //searchbtn.setOnAction(e -> showGrade());
@@ -107,7 +97,7 @@ public class Main extends Application {
     cbo.setPrefWidth(300);
     cbo.setTranslateX(2);
     cbo.setTranslateY(2);
-    cbo.setValue("SmartScript Spectacle");
+    cbo.setValue("NightVision Optics");
     ObservableList<String> items = FXCollections.observableArrayList(productTitles);
     cbo.getItems().addAll(items);
     pane.setCenter(descriptionPane);
@@ -129,61 +119,7 @@ public class Main extends Application {
     descriptionPane.setDescription(glassesDescription[index]);
   }
 
-  
-  /*private void initializeDB() {
-	    try {
-	      // Load the JDBC driver
-	      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-//	      Class.forName("oracle.jdbc.driver.OracleDriver");
-	      System.out.println("Driver loaded");
 
-	      // Establish a connection
-	      Connection connection = DriverManager.getConnection
-	        ("jdbc:derby:javabook;user=scott;password=tiger");
-//	    ("jdbc:oracle:thin:@liang.armstrong.edu:1521:orcl",
-//	     "scott", "tiger");
-	      System.out.println("Database connected");
-
-	      // Create a statement
-	      stmt = connection.createStatement();
-	    }
-	    catch (Exception ex) {
-	      ex.printStackTrace();
-	    }
-	  }
-  
-  private void showGrade() {
-	    String ssn = tfSSN.getText();
-	    String courseId = tfCourseId.getText();
-	    try {
-	      String queryString = "select firstName, mi, " +
-	        "lastName, title, grade from Student, Enrollment, Course " +
-	        "where Student.ssn = '" + ssn + "' and Enrollment.courseId "
-	        + "= '" + courseId +
-	        "' and Enrollment.courseId = Course.courseId " +
-	        " and Enrollment.ssn = Student.ssn";
-
-	      ResultSet rset = stmt.executeQuery(queryString);
-
-	      if (rset.next()) {
-	        String lastName = rset.getString(1);
-	        String mi = rset.getString(2);
-	        String firstName = rset.getString(3);
-	        String title = rset.getString(4);
-	        String grade = rset.getString(5);
-
-	        // Display result in a label
-	        lblStatus.setText(firstName + " " + mi +
-	          " " + lastName + "'s grade on course " + title + " is " +
-	          grade);
-	      } else {
-	        lblStatus.setText("Not found");
-	      }
-	    }
-	    catch (SQLException ex) {
-	      ex.printStackTrace();
-	    }
-	  }*/
   public static void main(String[] args) {
     launch(args);
   }
