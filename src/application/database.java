@@ -10,7 +10,7 @@ public class database{
 	public database() {
 		try {
 			Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-			connection = DriverManager.getConnection("jdbc:derby:mydatabase13;create=true");
+			connection = DriverManager.getConnection("jdbc:derby:mydatabase1;create=true");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

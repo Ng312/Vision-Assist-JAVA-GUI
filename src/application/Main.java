@@ -35,7 +35,7 @@ public class Main extends Application {
 
   // Declare an ImageView array for the glasses
   private ImageView[] glassesImage = {new ImageView("glasses1.jpg"),
-      new ImageView("glasses2.jpeg"),new ImageView("glasses3.jpg"),new ImageView("glasses4.jpg"),
+      new ImageView("glasses2.jpg"),new ImageView("glasses3.jpeg"),new ImageView("glasses4.jpg"),
       new ImageView("glasses5.jpg")};
   
   
