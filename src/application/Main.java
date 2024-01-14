@@ -29,7 +29,7 @@ public class Main extends Application {
   int height = 210;
   private Statement stmt;
 
-  // Declare an array of Strings for flag titles
+  // Declare an array of Strings for glasses titles
   private String[] productTitles = {"NightVision Optics", "ClearSight Optics","FarSight Precision Optics ",
 		  "ChromaCorrect Opticss","PresbySculpt Optics"};
 
@@ -39,21 +39,21 @@ public class Main extends Application {
       new ImageView("glasses5.jpg")};
   
   
-  // Declare an array of strings for flag descriptions
+  // Declare an array of strings for glasses description
   private String[] glassesDescription = new String[5];
 
   // Declare and create a description pane
   private DescriptionPane descriptionPane = new DescriptionPane();
   private HeaderPane headerPane = new HeaderPane();
-  // Create a combo box for selecting countries
+  // Create a combo box for selecting glasses
   private ComboBox<String> cbo = new ComboBox<>(); // 
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
 	  
     //Set size for each image 
     for (ImageView imageView : glassesImage) {
-          imageView.setFitWidth(width);  // Set your preferred width
-          imageView.setFitHeight(height); // Set your preferred height
+          imageView.setFitWidth(width);  
+          imageView.setFitHeight(height); 
     }
 	  
 	// Set text description
@@ -79,12 +79,9 @@ public class Main extends Application {
 
     // Add combo box and description pane to the border pane
     BorderPane pane = new BorderPane();
-    //pane.setStyle("-fx-background : #FFE194;");
     BorderPane paneForComboBox = new BorderPane();
 
     VBox vBox = new VBox(10);
- 
-    //searchbtn.setOnAction(e -> showGrade());
     Label productlb = new Label("Select a product");
     productlb.setTranslateX(260);
     productlb.setTranslateY(5);
@@ -107,9 +104,9 @@ public class Main extends Application {
     
     // Create a scene and place it in the stage
     Scene scene = new Scene(pane);
-    primaryStage.setTitle("Smart Glasses GUI"); // Set the stage title
-    primaryStage.setScene(scene); // Place the scene in the stage
-    primaryStage.show(); // Display the stage
+    primaryStage.setTitle("Focus Point Product GUI"); 
+    primaryStage.setScene(scene); 
+    primaryStage.show(); 
   }
 
   /** Set display information on the description pane */
