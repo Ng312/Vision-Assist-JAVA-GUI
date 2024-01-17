@@ -1,8 +1,9 @@
 package application;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.*;
-
-
+import java.util.Scanner;
 import org.apache.derby.iapi.sql.Statement;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -26,16 +27,16 @@ import javafx.scene.paint.Color;
 
 public class Main extends Application {
   int width = 350;
-  int height = 210;
+  int height = 400;
   private Statement stmt;
 
   // Declare an array of Strings for glasses titles
   private String[] productTitles = {"NightVision Optics", "ClearSight Optics","FarSight Precision Optics ",
-		  "ChromaCorrect Opticss","PresbySculpt Optics"};
+		  "ChromaCorrect Optics","PresbySculpt Optics"};
 
   // Declare an ImageView array for the glasses
   private ImageView[] glassesImage = {new ImageView("glasses1.jpg"),
-      new ImageView("glasses2.jpg"),new ImageView("glasses3.jpeg"),new ImageView("glasses4.jpg"),
+      new ImageView("glasses2.jpg"),new ImageView("glasses3.jpg"),new ImageView("glasses4.jpg"),
       new ImageView("glasses5.jpg")};
   
   
@@ -56,24 +57,13 @@ public class Main extends Application {
           imageView.setFitHeight(height); 
     }
 	  
-	// Set text description
-    glassesDescription[0] = "Introducing our revolutionary eyewear solution, NightVision Optics, specially designed to provide enhanced "
-    		+ "visibility and combat night blindness. Engineered with cutting-edge technology,"
-    		+ " these glasses are crafted for those seeking improved vision in low-light conditions.";
-    glassesDescription[1] = "Discover a new realm of visual clarity with our ClearSight Optics, meticulously designed to address "
-    		+ "short-sightedness and provide unparalleled visual correction. Engineered with precision and comfort in mind, "
-    		+ "these glasses offer a holistic approach to managing myopia.";
-    glassesDescription[2] = "Experience the world with unparalleled clarity and precision using our FarSight Precision Optics ,"
-    		+ " expertly crafted to address long-sightedness and provide a crystal-clear view of both near and distant objects. "
-    		+ "Designed for comfort and style, these glasses redefine the way you perceive the world.";
-    glassesDescription[3] = "Introducing ChromaCorrect Optic, a groundbreaking solution designed to transform the way individuals "
-    		+ "with color blindness experience the world. These cutting-edge glasses are engineered to enhance color perception,"
-    		+ " providing a vivid and vibrant visual experience like never before.";
-    glassesDescription[4] = "Empower your vision and rediscover the joy of reading with PresbySculpt Optics. "
-    		+ "Crafted specifically for individuals experiencing presbyopia, these innovative glasses seamlessly"
-    		+ "blend advanced optics with elegant design, offering a sophisticated solution for near-vision clarity.";
-    		
-    
+    //Set product description
+    try {
+		setDescription();
+	} catch (FileNotFoundException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
     // Set the first product for display
     setDisplay(0);
 
@@ -82,17 +72,13 @@ public class Main extends Application {
     BorderPane paneForComboBox = new BorderPane();
 
     VBox vBox = new VBox(10);
-    Label productlb = new Label("Select a product");
-    productlb.setTranslateX(260);
-    productlb.setTranslateY(5);
-
     // Set up the ComboBox
     paneForComboBox.setTop(headerPane);
-    paneForComboBox.setLeft(productlb);
+
     paneForComboBox.setCenter(cbo);
     pane.setTop(paneForComboBox);
     cbo.setPrefWidth(300);
-    cbo.setTranslateX(2);
+    cbo.setTranslateX(25);
     cbo.setTranslateY(2);
     cbo.setValue("NightVision Optics");
     ObservableList<String> items = FXCollections.observableArrayList(productTitles);
@@ -116,6 +102,20 @@ public class Main extends Application {
     descriptionPane.setDescription(glassesDescription[index]);
   }
 
+  public void setDescription() throws FileNotFoundException {
+	 Scanner read = new Scanner(new File("C:\\Users\\ngmt3\\eclipse-workspace\\SmartGlasses\\bin\\productDesc.txt")); 
+	 StringBuilder fileContent = new StringBuilder(); 
+     while (read.hasNextLine()) {
+    	 fileContent.append(read.nextLine()).append("\n");
+     }
+	 String line = fileContent.toString();
+	 String[] desc = line.split("/");
+	 glassesDescription[0] = desc[0];
+	 glassesDescription[1] = desc[1];
+	 glassesDescription[2] = desc[2];
+	 glassesDescription[3] = desc[3];
+	 glassesDescription[4] = desc[4];
+  }
 
   public static void main(String[] args) {
     launch(args);

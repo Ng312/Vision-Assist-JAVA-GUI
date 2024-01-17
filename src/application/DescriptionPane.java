@@ -28,6 +28,7 @@ public class DescriptionPane extends BorderPane {
  //   taDescription.setWrapText(true);
     taDescription.setEditable(false);
     taDescription.setWrapText(true);
+    taDescription.setPrefSize(600, 400);
 
     // Create a scroll pane to hold the text area
     ScrollPane scrollPane = new ScrollPane(taDescription);
