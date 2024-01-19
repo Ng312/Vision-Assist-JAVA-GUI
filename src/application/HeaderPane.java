@@ -152,27 +152,31 @@ public class HeaderPane extends BorderPane{
         GridPane.setHalignment(signupbtn, HPos.RIGHT);
 
         signupbtn.setOnAction(e -> {
-            try {
-                pane.getChildren().remove(mssg);
-                selected = String.valueOf(impairmentcb.getValue());
-                boolean success = db.insertCusData(new_emailtf.getText(), new_name.getText(), selected);
-                
-                if (success) {
-                    db.queryAndPrintData(new_emailtf.getText());
-                    mssg.setTextFill(Color.GREEN); 
-                    mssg.setText("Sign up successful.");
-                } else {
-                	mssg.setTextFill(Color.RED); 
-                    mssg.setText("User already exists.");;
-                }
-                
-                pane.add(mssg, 0, 4);
-                impairmentcb.valueProperty().set(null);
-                new_emailtf.clear();
-                new_name.clear();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
+        	if(!new_emailtf.getText().isBlank()) {
+	            try {
+	                pane.getChildren().remove(mssg);
+	                selected = String.valueOf(impairmentcb.getValue());
+	                boolean success = db.insertCusData(new_emailtf.getText(), new_name.getText(), selected);
+	                
+	                if (success) {
+	                    db.queryAndPrintData(new_emailtf.getText());
+	                    mssg.setTextFill(Color.GREEN); 
+	                    mssg.setText("Sign up successful.");
+	                } else {
+	                	mssg.setTextFill(Color.RED); 
+	                    mssg.setText("User already exists.");;
+	                }
+	                
+	                pane.add(mssg, 0, 4);
+	                impairmentcb.valueProperty().set(null);
+	                new_emailtf.clear();
+	                new_name.clear();
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	            }
+        	} else {
+        		mssg.setText("Invalid e-mail.");;
+        	}
         });
 
         pane.setVgap(10);
