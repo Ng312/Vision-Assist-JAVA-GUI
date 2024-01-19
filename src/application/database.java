@@ -23,6 +23,7 @@ public class database{
 
     public void action() {
         try {
+        	dropTable();
             createTable();
             insertProdData("Night Blindness","NightVision Optics");
             insertProdData("Short-sightedness","ClearSight Optics");
@@ -50,6 +51,16 @@ public class database{
 		}
        
     }
+    
+    private static void dropTable() {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute("DROP TABLE customer");
+            statement.execute("DROP TABLE product");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     static boolean insertCusData( String email, String name, String vision_impairment){
         String sql = "INSERT INTO customer (email, name, vision_impairment) VALUES (?, ?, ?)";

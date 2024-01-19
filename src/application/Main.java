@@ -5,13 +5,18 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.Scanner;
 import org.apache.derby.iapi.sql.Statement;
+
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,6 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.*;
 import javafx.scene.paint.Color;
 
 public class Main extends Application {
@@ -48,10 +54,57 @@ public class Main extends Application {
   private HeaderPane headerPane = new HeaderPane();
   // Create a combo box for selecting glasses
   private ComboBox<String> cbo = new ComboBox<>(); // 
+  
+  private void displayLoadingVideo(Stage primaryStage) {
+      Group root = new Group();
+
+      Media media = new Media("file:///C:/Users/ngmt3/eclipse-workspace/SmartGlasses/bin/video.mp4");
+      MediaPlayer mediaPlayer = new MediaPlayer(media);
+      MediaView mediaView = new MediaView(mediaPlayer);
+
+      mediaView.setPreserveRatio(false);
+      root.getChildren().add(mediaView);
+
+      // Create a fade transition for a smooth transition
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), root);
+      fadeTransition.setFromValue(1);
+      fadeTransition.setToValue(0);
+      fadeTransition.setOnFinished(event -> {
+          // Switch to the main application window after the loading video
+          Platform.runLater(() -> {
+              // Continue with the main application logic
+              displayMainApp(primaryStage);
+          });
+      });
+
+      // Play the video
+      mediaPlayer.setOnReady(() -> {
+          mediaPlayer.play();
+      });
+
+      mediaPlayer.setOnEndOfMedia(() -> {
+          fadeTransition.play();
+      });
+      
+      
+      mediaView.setFitWidth(800); 
+      mediaView.setFitHeight(450); 
+
+      Scene scene = new Scene(root, 800, 450);
+      
+      primaryStage.setScene(scene);
+      primaryStage.setTitle("Vision Assist");
+      primaryStage.show();
+  }
+  
+  
   @Override // Override the start method in the Application class
   public void start(Stage primaryStage) {
-	  
-    //Set size for each image 
+      displayLoadingVideo(primaryStage);
+  }
+  
+  private void displayMainApp(Stage primaryStage) {    
+	  //Set size for each image 
     for (ImageView imageView : glassesImage) {
           imageView.setFitWidth(width);  
           imageView.setFitHeight(height); 
@@ -90,7 +143,7 @@ public class Main extends Application {
     
     // Create a scene and place it in the stage
     Scene scene = new Scene(pane);
-    primaryStage.setTitle("Focus Point Product GUI"); 
+    primaryStage.setTitle("Vision Assist"); 
     primaryStage.setScene(scene); 
     primaryStage.show(); 
   }
@@ -103,7 +156,7 @@ public class Main extends Application {
   }
 
   public void setDescription() throws FileNotFoundException {
-	 Scanner read = new Scanner(new File("C:\\Users\\ngmt3\\eclipse-workspace\\SmartGlasses\\bin\\productDesc.txt")); 
+	 Scanner read = new Scanner(new File("C:/Users/ngmt3/eclipse-workspace/SmartGlasses/bin/product.txt"));
 	 StringBuilder fileContent = new StringBuilder(); 
      while (read.hasNextLine()) {
     	 fileContent.append(read.nextLine()).append("\n");
