@@ -4,10 +4,10 @@
 
 ![Vision Assist GUI HomePage](screenshots/homepage.png)
 ![Vision Assist GUI HomePage](screenshots/homepage-2.png)
-HomePage of 'Vision Assist' GUI, introducing different types of glasses
+HomePage of 'Vision Assist' GUI, introducing different types of glasses.
 
 ![Vision Assist GUI Sign Up Page](screenshots/sign-up-page.png)
 Users are required to fill in email, optional to put name to sign up.
 
 ![Vision Assist GUI Suggestion Page](screenshots/suggestion-page.png)
-Upon signing up as a member, users can seek for personalized recommendation by filling in their email used and search for suggestion.
+Upon signing up as a member, users can seek for personalized recommendation by filling in their email and search for suggestion.
